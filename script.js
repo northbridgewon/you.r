@@ -1,5 +1,5 @@
 function countdownTimer() {
-    const targetDate = new Date("May 04, 2024").getTime();
+    const targetDate = new Date("July 04, 2024").getTime();
     const currentDate = new Date().getTime();
     const remainingTime = targetDate - currentDate;
     const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
