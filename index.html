@@ -1,33 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Red Report | USA | Coming Soon</title>
-    <link rel="stylesheet" href="styles.css">
+<html><head>
+<title>Your Red Report | USA | Coming Soon</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #212121, #000000, #212121);
+    color: #fff;
+    overflow: hidden;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  #countdown {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    animation: particleAnimation 1s ease-out forwards;
+  }
+  @keyframes particleAnimation {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
-
 <body>
-    <div class="content">
-        <h1 id="countdown"></h1>
-    </div>
-    <script src="script.js"></script>
-</body>
+<div class="container">
+  <h1>Coming Soon</h1>
+  <div id="countdown"></div>
+</div>
 
-<footer>
-    <a href="">Facebook</a>
-    <a href="">TikTok</a>
-    <a href="">X</a>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJYS1KC32V"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-GJYS1KC32V');
-    </script>
-</footer>
+<script>
+  // Set the date we're counting down to
+  const countDownDate = new Date("2024-08-24T11:11:11").getTime();
 
-<!--Made with Much Love at https://QSD.SERVICES/ -->
+  // Update the countdown every 1 second
+  const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
 
-</html>
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "RELEASED";
+    }
+  }, 1000);
+
+  // Particle animation
+  document.addEventListener('mousemove', function(e) {
+    createParticle(e.clientX, e.clientY);
+  });
+
+  function createParticle(x, y) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 10 + 5;
+    const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+    
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.background = color;
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    
+    document.body.appendChild(particle);
+    
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+</script>
+</body></html>
